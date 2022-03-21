@@ -1,6 +1,6 @@
-# Phase-1-Project
+# Brewery Information app
 
-*Brewery Rater
+##Brewery Rater
 
 INTRODUCTION
 ------------
