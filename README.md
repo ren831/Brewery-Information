@@ -1,5 +1,5 @@
 # Brewery Information
-This is a simple website that utilizes the [OpenBrew](https://api.openbrewerydb.org/breweries?by_state=california) and allows you to find more information about each brewery.
+This is a simple website that utilizes the [OpenBrew API](https://api.openbrewerydb.org/breweries?by_state=california) and allows you to find more information about each brewery.
 
 You can visit the Brewery App here: 
 
