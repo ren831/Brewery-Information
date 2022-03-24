@@ -1,7 +1,7 @@
 # Brewery Information
 This is a simple website that utilizes the [OpenBrew API](https://api.openbrewerydb.org/breweries?by_state=california) and allows you to find more information about each brewery.
 
-You can visit the Brewery App here: 
+You can visit the Brewery App here: [Brewery-Info] (http://127.0.0.1:5501/index.html)
 
 You can also watch a short walkthrough of the project here
 
@@ -16,5 +16,13 @@ To create your own copy of this project:
 
 
 ## Features 
-* 
+* Display names of California Breweries
+* Display information of each Brewery.(Name, City, Street, Brewery-Type)
+  *Click on a brewery name to show their information
+* Ability to add new Brewerries and their information
 
+
+## Resources used 
+
+* Built with simple HTML, CSS, and vanilla JavaScript
+* Used [Bootstrap 5](https://getbootstrap.com/) as a base for the website
