@@ -1,45 +1,60 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", (e) => {
   baseURL = "https://api.openbrewerydb.org/breweries?by_state=california";
+  brewUL = document.querySelector("#Brewery-Container");
+  NewBrewForm = document.querySelector("#new-brewery");
+  const breweryList = document.createElement("li");
 
-  let brewerySelect = document.querySelector("#brewery-dropdown");
-  const form = document.getElementById("new-brewery");
-  let breweryUL = document.querySelector("#Brewery-Container");
-  let breweryInfo = document.querySelector(
-    "body > div.col-container > div.brew-info"
-  );
-  console.log(breweryInfo);
+  NewBrewForm.addEventListener("submit", (e) => {
+    const breweryList = document.createElement("li");
+    e.preventDefault();
+    const brewObj = [];
+    brewObj.name = document.querySelector("#new-name").value;
+    brewObj.city = document.querySelector("#Add-City").value;
+    brewObj.brewery_type = document.querySelector("#Brewery-Type").value;
+    brewObj.street = document.querySelector("#Brewery-Adress").value;
+
+    displayBrewery(brewObj);
+  });
 
   fetch(baseURL)
     .then((r) => r.json())
-    .then(function (jsonObj) {
-      let brewArr = jsonObj;
-      brewArr.forEach((brewery) => {
-        breweryUL.innerHTML += `<li>${brewery.name}</li>`;
-      });
+    .then((data) => displayBrewARR(data));
+
+  function displayBrewery(brewery) {
+    const breweryList = document.createElement("li");
+
+    breweryList.name = brewery.name;
+    breweryList.city = brewery.city;
+    breweryList.business = brewery.brewery_type;
+    breweryList.adress = brewery.street;
+
+    breweryList.append(breweryList.name);
+
+    breweryList.addEventListener("click", (e) => {
+      document.querySelector(
+        "body > div.col-container > div.brew-info > h2 > p"
+      ).innerHTML = breweryList.name;
+      document.querySelector(
+        "body > div.col-container > div.brew-info > h4 > p"
+      ).innerHTML = breweryList.city;
+      document.querySelector(
+        "body > div.col-container > div.brew-info > h5 > p"
+      ).innerHTML = breweryList.business;
+      document.querySelector(
+        "body > div.col-container > div.brew-info > h6 > p"
+      ).innerHTML = breweryList.adress;
     });
 
-  brewerySelect.addEventListener("change", (e) => {
-    fetch(baseURL)
-      .then((r) => r.json())
-      .then(function (jsonObj) {
-        jsonObj.forEach((brewery) => {
-          console.log(brewery);
-        });
-      });
-  });
+    brewUL.append(breweryList);
+  }
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    let hi = document.querySelector(
-      "body > div.col-container > div.col-brew-list"
-    );
-    breweryObj = document.createElement("li");
+  let image = document.querySelector(
+    "body > div.col-container > div.col-brew-list > img"
+  );
 
-    breweryObj.name = document.getElementById("new-name").value;
-    breweryObj.city = document.getElementById("Add-City").value;
-    breweryObj.type = document.getElementById("Brewery-Type").value;
-    breweryObj.rating = document.getElementById("new-rating").value;
-
-    hi.append(breweryObj.name);
-  });
+  function displayBrewARR(brewery) {
+    brewery.forEach((brewery) => {
+      displayBrewery(brewery);
+    });
+  }
 });
