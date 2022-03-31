@@ -1,32 +1,31 @@
 document.addEventListener("DOMContentLoaded", (e) => {
+  e.preventDefault();
   baseURL = "https://api.openbrewerydb.org/breweries?by_state=california";
   brewUL = document.querySelector("#Brewery-Container");
   NewBrewForm = document.querySelector("#new-brewery");
-  const breweryList = document.createElement("li");
-
-  NewBrewForm.addEventListener("submit", (e) => {
-    const breweryList = document.createElement("li");
-    e.preventDefault();
-    const brewObj = [];
-    brewObj.name = document.querySelector("#new-name").value;
-    brewObj.city = document.querySelector("#Add-City").value;
-    brewObj.brewery_type = document.querySelector("#Brewery-Type").value;
-    brewObj.street = document.querySelector("#Brewery-Adress").value;
-
-    displayBrewery(brewObj);
-  });
 
   fetch(baseURL)
     .then((r) => r.json())
-    .then((data) => displayBrewARR(data));
+    .then((r) => displayBrewArr(r));
 
-  function displayBrewery(brewery) {
+  NewBrewForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const brewObj = {};
+    brewObj.name = document.querySelector("#new-name").value;
+    brewObj.city = document.querySelector("#Add-City").value;
+    brewObj.street = document.querySelector("#Brewery-Adress").value;
+    brewObj.brewery_type = document.querySelector("#Brewery-Type").value;
+
+    displayBrew(brewObj);
+  });
+
+  function displayBrew(brewery) {
     const breweryList = document.createElement("li");
 
     breweryList.name = brewery.name;
     breweryList.city = brewery.city;
-    breweryList.business = brewery.brewery_type;
-    breweryList.adress = brewery.street;
+    breweryList.street = brewery.street;
+    breweryList.brewtype = brewery.brewery_type;
 
     breweryList.append(breweryList.name);
 
@@ -39,22 +38,17 @@ document.addEventListener("DOMContentLoaded", (e) => {
       ).innerHTML = breweryList.city;
       document.querySelector(
         "body > div.col-container > div.brew-info > h5 > p"
-      ).innerHTML = breweryList.business;
+      ).innerHTML = breweryList.street;
       document.querySelector(
         "body > div.col-container > div.brew-info > h6 > p"
-      ).innerHTML = breweryList.adress;
+      ).innerHTML = breweryList.brewtype;
     });
-
     brewUL.append(breweryList);
   }
 
-  let image = document.querySelector(
-    "body > div.col-container > div.col-brew-list > img"
-  );
-
-  function displayBrewARR(brewery) {
-    brewery.forEach((brewery) => {
-      displayBrewery(brewery);
+  function displayBrewArr(breweries) {
+    breweries.forEach((brewery) => {
+      displayBrew(brewery);
     });
   }
 });

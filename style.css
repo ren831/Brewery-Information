@@ -18,7 +18,23 @@ body {
   font-weight: bolder;
 }
 
-h3 {
+#brew-info {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-gap: 5px;
+  font-weight: bolder;
+}
+
+h3,
+h4,
+h5,
+h6 {
   font-weight: bolder;
   font-style: oblique;
+  font-size: medium;
+}
+
+p {
+  font-style: italic;
+  color: whitesmoke;
 }
