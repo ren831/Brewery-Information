@@ -2,13 +2,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
   e.preventDefault();
   baseURL = "https://api.openbrewerydb.org/breweries?by_state=california";
   brewUL = document.querySelector("#Brewery-Container");
-  NewBrewForm = document.querySelector("#new-brewery");
+  newBrewForm = document.querySelector("#new-brewery");
 
   fetch(baseURL)
     .then((r) => r.json())
     .then((r) => displayBrewArr(r));
 
-  NewBrewForm.addEventListener("submit", (e) => {
+  newBrewForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const brewObj = {};
     brewObj.name = document.querySelector("#new-name").value;
@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
     brewObj.brewery_type = document.querySelector("#Brewery-Type").value;
 
     displayBrew(brewObj);
+    
+   newBrewForm.reset()
   });
 
   function displayBrew(brewery) {
